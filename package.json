@@ -1,8 +1,26 @@
 {
-  "name": "playwright-bdd-example",
+  "name": "playwright-bdd-cukes-ts",
   "version": "0.1.0",
   "scripts": {
-    "test": "npx bddgen && npx playwright test",
+    "prod:all:headed": "NODE_ENV=prod npx bddgen && NODE_ENV=prod npx playwright test --headed --retries=2",
+    "prod:all:headless": "NODE_ENV=prod npx bddgen && NODE_ENV=prod npx playwright test --retries=2",
+    "prod:all:parallel:headed": "NODE_ENV=prod npx bddgen && NODE_ENV=prod npx playwright test --headed --workers=3 --retries=2",
+    "prod:all:parallel:headless": "NODE_ENV=prod npx bddgen && NODE_ENV=prod npx playwright test --workers=3 --retries=2",
+    "prod:firefox:parallel:headed": "NODE_ENV=prod npx bddgen && NODE_ENV=prod npx playwright test --headed --project=firefox --workers=3 --retries=2",
+    "prod:firefox:parallel:headless": "NODE_ENV=prod npx bddgen && NODE_ENV=prod npx playwright test --project=firefox --workers=3 --retries=2",
+    "prod:safari:parallel:headed": "NODE_ENV=prod npx bddgen && NODE_ENV=prod npx playwright test --headed --project=webkit --workers=3 --retries=2",
+    "prod:safari:parallel:headless": "NODE_ENV=prod npx bddgen && NODE_ENV=prod npx playwright test --project=webkit --workers=3 --retries=2",
+    "prod:chromium:parallel:headed": "NODE_ENV=prod npx bddgen && NODE_ENV=prod npx playwright test --headed --project=chromium --workers=3 --retries=2",
+    "prod:chromium:parallel:headless": "NODE_ENV=prod npx bddgen && NODE_ENV=prod npx playwright test --project=chromium --workers=3 --retries=2",
+    "prod:smoke:chromium:headed": "NODE_ENV=prod npx bddgen --tags \"@smoke\" && NODE_ENV=prod npx playwright test --headed --project=chromium --workers=3 --retries=2",
+    "prod:regression:firefox:headed": "NODE_ENV=prod npx bddgen --tags \"@regression\" && NODE_ENV=prod npx playwright test --headed --project=firefox --workers=3 --retries=2",
+
+    "_comment_staging": "Staging environment is non-existent; this is included to demonstrate how to set and switch test environments.",
+    "staging:all:headed": "NODE_ENV=staging npx bddgen && NODE_ENV=staging npx playwright test --headed --retries=2",
+    "staging:all:headless": "NODE_ENV=staging npx bddgen && NODE_ENV=staging npx playwright test --retries=2",
+    "staging:all:parallel:headed": "NODE_ENV=staging npx bddgen && NODE_ENV=staging npx playwright test --headed --workers=3 --retries=2",
+    "staging:all:parallel:headless": "NODE_ENV=staging npx bddgen && NODE_ENV=staging npx playwright test --workers=3 --retries=2",
+
     "watch:bdd": "nodemon -w ./features -w ./steps -e feature,js,ts --exec \"npx bddgen\"",
     "watch:pw": "playwright test --ui",
     "watch": "run-p watch:*",
@@ -17,6 +35,7 @@
     "playwright-bdd": "^8.0.1",
     "prettier": "3.4.2",
     "prettier-plugin-gherkin": "^3.1.1",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "@faker-js/faker": "^9.3.0"
   }
 }

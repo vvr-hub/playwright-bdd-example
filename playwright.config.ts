@@ -3,7 +3,7 @@ import { defineBddConfig, cucumberReporter } from 'playwright-bdd';
 
 const testDir = defineBddConfig({
   features: 'features/*.feature',
-  steps: 'features/steps/*.ts',
+  steps: 'features/stepDefinitions/*.ts',
 });
 
 export default defineConfig({
@@ -23,7 +23,31 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: { width: 1366, height: 768 }, // viewport: {width: 1280, height: 720},
+      },
+      fullyParallel: true,
+    },
+
+    {
+      name: 'firefox', // Desktop Firefox
+      use: {
+        ...devices['Desktop Firefox'],
+      },
+      fullyParallel: true,
+    },
+
+    {
+      name: 'webkit', // macOS Safari
+      use: {
+        ...devices['Desktop Safari'],
+      },
+      fullyParallel: true,
     },
   ],
+  expect: { timeout: 12000 },
+  timeout: 60000, // Timeout for the entire test
+  workers: 1,
+  retries: 2
 });
