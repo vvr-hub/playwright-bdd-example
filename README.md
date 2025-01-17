@@ -24,7 +24,7 @@ It has a few sample automated tests for a [demo website](https://opensource-demo
 #### Steps:
 1. Clone the project to your local machine
    ```
-   git clone <LINK_TO_BE_PROVIDED>
+   git clone https://github.com/vvr-hub/playwright-bdd-example.git
    ```
 2. Change directory to `playwright-bdd-cukes-ts-hr`
    ```
