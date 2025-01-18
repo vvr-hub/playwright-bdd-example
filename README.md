@@ -41,13 +41,8 @@ It has a few sample automated tests for a [demo website](https://opensource-demo
 
 ## Setting the Test Environment and Running Tests
 
-#### Important Note:
-
-* These commands are for **Zsh** (Z Shell).
-* Modify the commands for other shells (e.g., PowerShell).
-
 #### Setting Environment:
-
+These commands are for Unix based OS (e.g., bash, **Z Shell**).
 * To set the target environment to staging environment
     ```
     export NODE_ENV=staging
@@ -61,7 +56,26 @@ It has a few sample automated tests for a [demo website](https://opensource-demo
     echo $NODE_ENV
     ```
 
+These commands are for Windows OS (e.g., PowerShell).
+* To set the target environment to staging environment
+    ```
+    $env:NODE_ENV = "staging"
+    ```
+* To set the target environment to prod environment
+    ```
+    $env:NODE_ENV = "prod"
+    ```
+* To see which environment is set
+    ```
+    echo $env:NODE_ENV
+    ```
+
 #### Running Tests:
+
+##### Important Note:
+
+* These commands are for Unix based OS (e.g., bash, **Z Shell**).
+* Modify the commands for Windows OS (e.g., PowerShell).
 
 * To run a specific script from package.json
     ```
@@ -97,7 +111,6 @@ Below are details about some of the key folders and files in the project:
 
 
 
-
 * `features/` - Business-friendly Tests in BDD format written in Gherkin.
 
 * `stepDefinitions/` - Steps which invoke the respectivepage functions.
@@ -125,6 +138,6 @@ The individual Page Object Models (POMs) defined in separate pages in the pages 
 
 
 ## Acknowledgement and Thanks
-- **Vitalets playwright-bdd example** project has been very useful in creating this project
+- **Vitalets playwright-bdd example** project has been very useful in creating this project.
 - The demo website for **Orange HR Management web application** has been very useful for writing sample tests in this project
 
