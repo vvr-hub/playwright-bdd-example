@@ -4,7 +4,7 @@
 
 This is a **work in progress** project that uses [playwright-bdd](https://github.com/vitalets/playwright-bdd) to run BDD tests.
 
-It has a few sample automated tests for a [demo website](https://opensource-demo.orangehrmlive.com/). The aim is not to cover 100% of the functionality in these tests. The coverage is minimal. The aim is to create a scalable, maintainable and robust test project in Playwright, Cucumber, TypeScript and Gherkin adopting playwright-bdd and page object model using some best practices.
+It has a few sample automated tests for a [demo website](https://opensource-demo.orangehrmlive.com/). The aim iss not to cover 100% of the functionality in these tests. The coverage is minimal. Created a scalable, maintainable and robust test project in Playwright, Cucumber, TypeScript and Gherkin adopting playwright-bdd and page object model using some best practices.
 
 #### Important Note:
 
@@ -72,8 +72,7 @@ These commands are for Windows OS (e.g., PowerShell).
 
 #### Running Tests:
 
-##### Important Note:
-* Below commands are for Unix based OS (e.g., bash, **Z Shell**). Please modify them for Windows OS (e.g., PowerShell).
+**Important Note:** Below commands are for Unix based OS (e.g., bash, **Z Shell**). Please modify them for Windows OS (e.g., PowerShell).
 
 
 * To run a specific script from package.json
