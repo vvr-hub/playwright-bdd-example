@@ -4,7 +4,7 @@
 
 This is a **work in progress** project that uses [playwright-bdd](https://github.com/vitalets/playwright-bdd) to run BDD tests.
 
-It has a few sample automated tests for a [demo website](https://opensource-demo.orangehrmlive.com/). The aim iss not to cover 100% of the functionality in these tests. The coverage is minimal. Created a scalable, maintainable and robust test project in Playwright, Cucumber, TypeScript and Gherkin adopting playwright-bdd and page object model using some best practices.
+It has a few sample automated tests for a [demo website](https://opensource-demo.orangehrmlive.com/). The aim is not to cover 100% of the functionality in these tests. The coverage is minimal. Created a scalable, maintainable and robust test project in Playwright, Cucumber, TypeScript and Gherkin adopting playwright-bdd and page object model using some best practices.
 
 #### Important Note:
 
@@ -79,11 +79,13 @@ These commands are for Windows OS (e.g., PowerShell).
     ```
     npm run <script-name>
     ```
-Example (running all tests in production, parallel and headless):
+    
+    Example (running all tests in production, parallel and headless):
+
     ```
     npm run prod:all:parallel:headless
     ```
-Please refer to the **scripts** section in `package.json` file for a variety of commands to run Playwright Tests, headed, headless, parallel, target browser, specific environment, smoke tests, regression tests, etc
+    Please refer to the **scripts** section in `package.json` file for a variety of commands to run Playwright Tests, headed, headless, parallel, target browser, specific environment, smoke tests, regression tests, etc
 
 * To run a specific Test Suite (e.g., EmployeeManagement):
     ```
