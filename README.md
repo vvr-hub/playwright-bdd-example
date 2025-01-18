@@ -73,9 +73,8 @@ These commands are for Windows OS (e.g., PowerShell).
 #### Running Tests:
 
 ##### Important Note:
+* Below commands are for Unix based OS (e.g., bash, **Z Shell**). Please modify them for Windows OS (e.g., PowerShell).
 
-* These commands are for Unix based OS (e.g., bash, **Z Shell**).
-* Modify the commands for Windows OS (e.g., PowerShell).
 
 * To run a specific script from package.json
     ```

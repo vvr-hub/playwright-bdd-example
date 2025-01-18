@@ -21,9 +21,6 @@
     "staging:all:parallel:headed": "NODE_ENV=staging npx bddgen && NODE_ENV=staging npx playwright test --headed --workers=3 --retries=2",
     "staging:all:parallel:headless": "NODE_ENV=staging npx bddgen && NODE_ENV=staging npx playwright test --workers=3 --retries=2",
 
-    "watch:bdd": "nodemon -w ./features -w ./steps -e feature,js,ts --exec \"npx bddgen\"",
-    "watch:pw": "playwright test --ui",
-    "watch": "run-p watch:*",
     "report": "npx http-server ./cucumber-report -c-1 -o index.html"
   },
   "devDependencies": {
