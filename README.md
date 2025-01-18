@@ -2,14 +2,11 @@
 
 ## About the project
 
-This is a **work in progress** automation test project that's built using [playwright-bdd](https://github.com/vitalets/playwright-bdd) for automated testing.
+This is a **work in progress** automation test project that's built using [playwright-bdd](https://github.com/vitalets/playwright-bdd)
 
-It has a few sample automated tests for a [demo website](https://opensource-demo.orangehrmlive.com/). The aim is not to cover 100% of the functionality in these tests. The coverage is minimal. Created this scalable, maintainable and robust test project in Playwright, Cucumber, TypeScript and Gherkin adopting playwright-bdd and page object model using some best practices.
-
-#### Important Note:
-
-* Some tests fail if the owners of the demo Orange HRM website change or remove the functionality, items in the left side panel, GUI elements on the pages, API end-points, etc.
-* The project uses a non-existent `staging` environment to showcase environment switching capabilities.
+*  It has a few sample automated tests for a [demo website](https://opensource-demo.orangehrmlive.com/). The aim is not to cover 100% of the functionality in these tests. The coverage is minimal. Created this scalable, maintainable and robust test project in Playwright, Cucumber, TypeScript and Gherkin adopting playwright-bdd and page object model using some best practices.
+*  Some tests fail if the owners of the demo Orange HRM website change or remove the functionality, items in the left side panel, GUI elements on the pages, API end-points, etc.
+*  The project uses a non-existent `staging` environment to showcase environment switching capabilities.
 
 
 ## Project Setup
@@ -144,5 +141,5 @@ The individual Page Object Models (POMs) defined in separate pages in the pages 
 
 
 ## Acknowledgement and Thanks
--  **Vitalets playwright-bdd example** project has been very useful in creating this project.
--  The demo website for **Orange HR Management web application** has been very useful for writing sample tests in this project
+*  **Vitalets playwright-bdd example** project has been very useful in creating this project.
+*  The demo website for **Orange HR Management web application** has been very useful for writing sample tests in this project
