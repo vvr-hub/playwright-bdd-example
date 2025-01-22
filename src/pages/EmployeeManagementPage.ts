@@ -8,8 +8,8 @@ import { IEmployeeDetails } from '../models/employeeDetails';
 import { SharedElements } from "../pageElements/SharedElements";
 import { EmployeeElements } from "../pageElements/EmployeeElements";
 
-import { getFormattedDate } from '../../src/utils/date-formatter';
-import { getRandomEnumValue } from '../../src/utils/random-enum-utils';
+import { getFormattedDate } from '../utils/date-formatter';
+import { getRandomEnumValue } from '../utils/random-enum-utils';
 
 import { API_ENDPOINTS } from '../constants/apiEndpoints';
 

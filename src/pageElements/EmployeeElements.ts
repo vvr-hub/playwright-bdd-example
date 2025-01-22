@@ -10,13 +10,10 @@ export class EmployeeElements {
     jobDetailsHeader = this.page.getByRole('heading', { name: 'Job Details' });
 
     // Add Employee Elements
-    addEmployeeTab = this.page.getByRole('link', { name: 'Add Employee' });
     addEmployeeHeader = this.page.getByRole('heading', { name: 'Add Employee' });
     saveButton = this.page.getByRole('button', { name: 'Save' });
-    cancelButton = this.page.getByRole('button', { name: 'Cancel' });
 
     // Employee List Elements
-    employeeListTab = this.page.getByRole('link', { name: 'Employee List' });
     employeeNameFilter = this.page.getByPlaceholder('Type for hints...').first();
     searchingProgressLabel = this.page.getByRole('option', { name: 'Searching....' });
     employeeIdFilter = this.page.locator("//label[text()='Employee Id']/parent::*[contains(@class,'label-wrapper')]/following-sibling::div/input");
