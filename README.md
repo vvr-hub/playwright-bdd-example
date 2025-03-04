@@ -8,6 +8,18 @@ This is a **work in progress** automation test project that's built using [playw
 *  Some tests fail if the owners of the demo Orange HRM website change or remove the functionality, items in the left side panel, GUI elements on the pages, API end-points, etc.
 *  The project uses a non-existent `staging` environment to showcase environment switching capabilities.
 
+## Features
+
+* Page Object Pattern
+* Parallelisation
+* Retries for failing tests
+* Reporting
+* Easy Test Environment Switching
+* Test Data Separation
+* Cross Browser (Compatibility) Testing - Chrome, Firefox, Safari
+* Randomisation (Example: while creating an employee, while selecting items in dropdowns, or from enums)
+* Avoids hardcoding, duplication, flakiness and sleeps
+* Scalability, Maintanability, Readability, Stability, Reusability, Adoptability
 
 ## Project Setup
 
@@ -116,7 +128,7 @@ Below are details about some of the key folders and files in the project:
 
 *  `features/` - Business-friendly Tests in BDD format written in Gherkin.
 
-*  `stepDefinitions/` - Steps which invoke the respectivepage functions.
+*  `stepDefinitions/` - Steps which invoke the respective page functions.
 
 *  `pages/` - Implements the actions or checks performed on each page within the web application. These functions are reusable.
 
@@ -128,7 +140,7 @@ Below are details about some of the key folders and files in the project:
 
 *  `utils/` - Contains (potentially) reusable utility functions, such as date formatting, picking values from enums, etc. These functions are not specific to the application's functionality but support testing.
 
-*  `envConfig.ts` - Manages environment-specific configurations (e.g., base URL, login credentials).
+*  `envConfig.ts` - Manages environment-specific configurations (e.g., base URL, login credentials, test data in future).
 
 *  `playwright.config.ts` - Contains Playwright settings (timeouts, parallelisation, viewport, retries, screenshots, trace, etc), browser and platform coverage
 
