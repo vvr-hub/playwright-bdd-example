@@ -17,9 +17,10 @@ This is a **work in progress** automation test project that's built using [playw
 * Easy Test Environment Switching
 * Test Data Separation
 * Cross Browser (Compatibility) Testing - Chrome, Firefox, Safari
-* Randomisation (Example: while creating an employee, while selecting items in dropdowns, or from enums)
+* Randomisation (Example: creates employee with random details, selects random items in dropdowns, or from enums)
 * Avoids hardcoding, duplication, flakiness and sleeps
-* Scalability, Maintanability, Readability, Stability, Reusability, Adoptability
+* Reusable utils and functions (step definitions)
+* Scalability, Maintanability, Readability, Stability, Adoptability
 
 ## Project Setup
 
@@ -121,6 +122,15 @@ Below commands are for Windows OS (e.g., **PowerShell**).
 *  Then open the following url in your browser
 
    `localhost:9323`
+
+
+## Project Structure
+
+<img width="371" alt="image" src="https://github.com/user-attachments/assets/ad23c6eb-a48e-4ef6-bb2b-82cf37a923d7" />
+
+-
+<img width="383" alt="image" src="https://github.com/user-attachments/assets/c98326fc-bd32-4bbc-b8f0-dff7da3f5951" />
+
 
 
 ## About the project structure
