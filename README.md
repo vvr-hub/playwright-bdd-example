@@ -20,7 +20,7 @@ This is a **work in progress** automation test project that's built using [playw
 * Randomisation (Example: creates employee with random details, selects random items in dropdowns, or from enums)
 * Avoids hardcoding, duplication, flakiness and sleeps
 * Reusable utils and functions (step definitions)
-* Scalability, Maintanability, Readability, Stability, Adoptability
+* Scalability, Maintainability, Readability, Stability, Adoptability
 
 ## Project Setup
 
