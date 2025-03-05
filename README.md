@@ -17,6 +17,8 @@ This is a **work in progress** automation test project that's built using [playw
 * Easy Test Environment Switching
 * Test Data Separation
 * Cross Browser (Compatibility) Testing - Chrome, Firefox, Safari
+* Tests are easy to read and understand, in (business-friendly) Give -> When -> Then format
+* Tags help in easily specifying which tests to run - smoke, regression or for a specific feature
 * Randomisation (Example: creates employee with random details, selects random items in dropdowns, or from enums)
 * Avoids hardcoding, duplication, flakiness and sleeps
 * Reusable utils and functions (step definitions)
