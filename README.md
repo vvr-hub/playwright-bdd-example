@@ -22,7 +22,7 @@ This is a **work in progress** automation test project that's built using [playw
 * Randomisation (Example: creates employee with random details, selects random items in dropdowns, or from enums)
 * Avoids hardcoding, duplication, flakiness and sleeps
 * Reusable utils and functions (step definitions)
-* Automated Security Testing with **OWASP ZAP** 
+* **Automated Security Testing** with **OWASP ZAP** 
 * Scalability, Maintainability, Readability, Stability, Adoptability
 
 ## Project Setup
@@ -53,13 +53,13 @@ This is a **work in progress** automation test project that's built using [playw
    ```
 
 
-#### 🔒 Setting Up OWASP ZAP for Security Testing
+### 🔒 Setting Up OWASP ZAP for Security Testing
 
-### 1️⃣ Download and Install OWASP ZAP
+#### 1️⃣ Download and Install OWASP ZAP
 - Download from the official website.
 - Install it on your system.  
 
-### 2️⃣ Set OWASP ZAP Path in `.zshrc`
+#### 2️⃣ Set OWASP ZAP Path in `.zshrc`
 For Mac, add the following to `~/.zshrc`:
 
 ```sh
@@ -78,14 +78,14 @@ Then apply changes:
 source ~/.zshrc
 ```
 
-### 3️⃣ Disable API Key Authentication in ZAP
+#### 3️⃣ Disable API Key Authentication in ZAP
 
 - Open **OWASP ZAP**.
 - Navigate to `Tools → Options → API`.
 - ✅ **Uncheck "Enable API Key"** (or check "Disable API Key").
 - Click **OK** and **restart ZAP**.
 
-### 4️⃣ Start OWASP ZAP in Daemon Mode
+#### 4️⃣ Start OWASP ZAP in Daemon Mode
 
 Run ZAP in **headless mode** (background mode) on port **8090**:
 
@@ -94,7 +94,7 @@ zap.sh -daemon -host 127.0.0.1 -port 8090
 ```
 _(Windows: `zap.bat -daemon -host 127.0.0.1 -port 8090`)_
 
-### 5️⃣ Verify ZAP API is Running
+#### 5️⃣ Verify ZAP API is Running
 
 Run the following command:
 
