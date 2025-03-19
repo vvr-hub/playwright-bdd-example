@@ -40,6 +40,12 @@ export const generateZapReport = async () => {
         const reportDir = path.join(process.cwd(), 'zap-reports');
         const reportPath = path.join(reportDir, 'security-report.html');
 
+        // Remove existing report before generating a new one
+        if (fs.existsSync(reportPath)) {
+            fs.unlinkSync(reportPath);
+            console.log(`🗑️ Removed old report: ${reportPath}`);
+        }
+
         // Create the directory if it does not exist
         if (!fs.existsSync(reportDir)) {
             fs.mkdirSync(reportDir, { recursive: true });

@@ -30,6 +30,11 @@ using [playwright-bdd](https://github.com/vitalets/playwright-bdd)
 * **Automated Security Testing** with **OWASP ZAP**
 * Scalability, Maintainability, Readability, Stability, Adoptability
 
+
+## Disclaimer: 
+The **security testing tools and scripts** provided in this project are intended solely for educational purposes and to facilitate security testing on applications you own or have explicit permission to test. Do not use these tools to conduct security tests on the **OrangeHRM demo website or any other third-party applications** without proper authorisation. **Unauthorised security testing** may violate legal agreements and could lead to legal action. By using these tools, you agree to take **full responsibility** for ensuring that your use complies with all applicable **laws and regulations**.​
+
+
 ## Project Setup
 
 #### Prerequisites:
