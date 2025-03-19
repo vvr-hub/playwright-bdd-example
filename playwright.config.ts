@@ -21,12 +21,6 @@ export default defineConfig({
   use: {
     screenshot: 'on',
     trace: 'on',
-    // Configure the browser to use ZAP's proxy
-    proxy: isZapTest
-      ? {
-        server: 'http://localhost:8090', // Enable ZAP proxy only for security tests
-      }
-      : undefined, // No proxy for normal tests
   },
   grepInvert: isZapTest ? undefined : /@zap-security/, // Exclude security tests by default
   projects: [

@@ -14,6 +14,7 @@
     "prod:chromium:parallel:headless": "NODE_ENV=prod npx bddgen && NODE_ENV=prod npx playwright test --project=chromium --workers=3 --retries=2",
     "prod:smoke:chromium:headed": "NODE_ENV=prod npx bddgen --tags \"@smoke\" && NODE_ENV=prod npx playwright test --headed --project=chromium --workers=3 --retries=2",
     "prod:regression:firefox:headed": "NODE_ENV=prod npx bddgen --tags \"@regression\" && NODE_ENV=prod npx playwright test --headed --project=firefox --workers=3 --retries=2",
+    "prod:zap-security": "ZAP_TEST=true NODE_ENV=prod npx bddgen --tags \"@zap-security\" && ZAP_TEST=true NODE_ENV=prod npx playwright test --project=chromium --retries=0 --timeout=600000",
     "_comment_staging": "Staging environment is non-existent; this is included to demonstrate how to set and switch test environments.",
     "staging:all:headed": "NODE_ENV=staging npx bddgen && NODE_ENV=staging npx playwright test --headed --retries=2",
     "staging:all:headless": "NODE_ENV=staging npx bddgen && NODE_ENV=staging npx playwright test --retries=2",
