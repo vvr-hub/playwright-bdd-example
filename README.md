@@ -269,13 +269,22 @@ vulnerabilities.
 
 ## Project Structure
 
-<img width="329" alt="image" src="https://github.com/user-attachments/assets/9695e643-03e4-4171-8536-6db93e94847e" />
+
+![image](https://github.com/user-attachments/assets/a5d66975-992c-4322-aca6-106b3c3f52e2)
 
 
 ......continued.....
 
 
-<img width="329" alt="image" src="https://github.com/user-attachments/assets/9131c02c-1f3e-4d4e-b33c-5e9407c849cc" />
+![image](https://github.com/user-attachments/assets/9bb3dd95-eeab-4c22-a964-cf2c79ec5fb9)
+
+
+......continued.....
+
+
+![image](https://github.com/user-attachments/assets/9a1f9b83-f240-4597-b081-3a73331f7f67)
+
+
 
 ## About the project structure
 
