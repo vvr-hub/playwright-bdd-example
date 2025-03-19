@@ -33,6 +33,7 @@ This is a **work in progress** automation test project that's built using [playw
 * VS Code (or another IDE)
 * Node.js and npm (Node Package Manager)
 * nvm (Node Version Manager)
+* OWASP ZAP (for the security testing of the web application). Steps provided in a later section
 
 #### Steps:
 1. Clone the project to your local machine
@@ -55,9 +56,10 @@ This is a **work in progress** automation test project that's built using [playw
 
 ### 🔒 Setting Up OWASP ZAP for Security Testing
 
-#### 1️⃣ Download and Install OWASP ZAP
-- Download from the official website.
-- Install it on your system.  
+#### 1️⃣ Install OWASP ZAP
+- Download from the official website and install it.  
+- For Mac OS, open the downloaded `.dmg` file and move `ZAP.app` to the `/Applications` folder.  
+
 
 #### 2️⃣ Set OWASP ZAP Path in `.zshrc`
 For Mac, add the following to `~/.zshrc`:
@@ -69,7 +71,7 @@ export PATH=$PATH:/path/to/zap
 For example:
 
 ```sh
-export PATH=$PATH:/Applications/ZAP.app/Contents/MacOS
+export PATH="$PATH:/Applications/ZAP.app/Contents/Java"
 ```
 
 Then apply changes:
@@ -78,12 +80,24 @@ Then apply changes:
 source ~/.zshrc
 ```
 
+Verify installation:
+
+```sh
+which zap.sh
+```
+
+Expected output:
+
+```swift
+/Applications/ZAP.app/Contents/Java/zap.sh
+```
+
 #### 3️⃣ Disable API Key Authentication in ZAP
 
 - Open **OWASP ZAP**.
 - Navigate to `Tools → Options → API`.
-- ✅ **Uncheck "Enable API Key"** (or check "Disable API Key").
-- Click **OK** and **restart ZAP**.
+- ✅ **Check "Disable API Key"** (or uncheck "Enable API Key").
+- **Restart ZAP**.
 
 #### 4️⃣ Start OWASP ZAP in Daemon Mode
 
@@ -93,6 +107,11 @@ Run ZAP in **headless mode** (background mode) on port **8090**:
 zap.sh -daemon -host 127.0.0.1 -port 8090
 ```
 _(Windows: `zap.bat -daemon -host 127.0.0.1 -port 8090`)_
+
+This makes ZAP listen on `port 8090` for web application security testing.  
+You should see something like the below at the bottom of the log.  
+`7390 [ZAP-daemon] INFO  org.zaproxy.addon.network.ExtensionNetwork - ZAP is now listening on 127.0.0.1:8090`  
+
 
 #### 5️⃣ Verify ZAP API is Running
 
@@ -107,6 +126,21 @@ curl "http://127.0.0.1:8090/JSON/core/view/version/"
 ```json
 {"version":"2.16.0"}%
 ```
+
+
+Check if ZAP is listening on port `8090`:
+
+```sh
+lsof -i :8090
+```
+
+Expected output:
+
+```pgsql
+COMMAND   PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+java    36987   vr  242u  IPv6 0xc983ecdaee0df363      0t0  TCP localhost:8090 (LISTEN)
+```
+
 
 
 ## Setting the Test Environment and Running Tests
@@ -185,7 +219,7 @@ Below commands are for Windows OS (e.g., **PowerShell**).
 
 
 ### 🚀 Running OWASP ZAP Security Test
-The security test is **excluded by default.** Run it manually using:
+The security test is **excluded by default** from the full suite. Run it manually using:
 
 ```sh
 ZAP_TEST=true NODE_ENV=prod npx bddgen --tags "@zap-security" && ZAP_TEST=true NODE_ENV=prod npx playwright test --project=chromium --retries=0 --timeout=600000
