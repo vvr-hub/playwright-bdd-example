@@ -226,10 +226,12 @@ It performs **spidering (crawling)** to discover web pages and endpoints, follow
 
 ## Project Structure
 
-<img width="371" alt="image" src="https://github.com/user-attachments/assets/ad23c6eb-a48e-4ef6-bb2b-82cf37a923d7" />
+<img width="329" alt="image" src="https://github.com/user-attachments/assets/9695e643-03e4-4171-8536-6db93e94847e" />
 
--
-<img width="383" alt="image" src="https://github.com/user-attachments/assets/c98326fc-bd32-4bbc-b8f0-dff7da3f5951" />
+
+......continued.....
+
+<img width="329" alt="image" src="https://github.com/user-attachments/assets/9131c02c-1f3e-4d4e-b33c-5e9407c849cc" />
 
 
 
