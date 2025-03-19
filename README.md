@@ -13,7 +13,7 @@ This is a **work in progress** automation test project that's built using [playw
 * Page Object Pattern
 * Parallelisation
 * Retries for failing tests
-* Reporting
+* Rich **Reporting** with Playwright & **OWASP ZAP** Reports
 * Easy Test Environment Switching
 * Test Data Separation
 * Cross Browser (Compatibility) Testing - Chrome, Firefox, Safari
@@ -22,6 +22,7 @@ This is a **work in progress** automation test project that's built using [playw
 * Randomisation (Example: creates employee with random details, selects random items in dropdowns, or from enums)
 * Avoids hardcoding, duplication, flakiness and sleeps
 * Reusable utils and functions (step definitions)
+* Automated Security Testing with **OWASP ZAP** 
 * Scalability, Maintainability, Readability, Stability, Adoptability
 
 ## Project Setup
@@ -50,6 +51,63 @@ This is a **work in progress** automation test project that's built using [playw
    ```
    npx playwright install
    ```
+
+
+#### 🔒 Setting Up OWASP ZAP for Security Testing
+
+### 1️⃣ Download and Install OWASP ZAP
+- Download from the official website.
+- Install it on your system.  
+
+### 2️⃣ Set OWASP ZAP Path in `.zshrc`
+For Mac, add the following to `~/.zshrc`:
+
+```sh
+export PATH=$PATH:/path/to/zap
+```
+
+For example:
+
+```sh
+export PATH=$PATH:/Applications/ZAP.app/Contents/MacOS
+```
+
+Then apply changes:
+
+```sh
+source ~/.zshrc
+```
+
+### 3️⃣ Disable API Key Authentication in ZAP
+
+- Open **OWASP ZAP**.
+- Navigate to `Tools → Options → API`.
+- ✅ **Uncheck "Enable API Key"** (or check "Disable API Key").
+- Click **OK** and **restart ZAP**.
+
+### 4️⃣ Start OWASP ZAP in Daemon Mode
+
+Run ZAP in **headless mode** (background mode) on port **8090**:
+
+```sh
+zap.sh -daemon -host 127.0.0.1 -port 8090
+```
+_(Windows: `zap.bat -daemon -host 127.0.0.1 -port 8090`)_
+
+### 5️⃣ Verify ZAP API is Running
+
+Run the following command:
+
+```sh
+curl "http://127.0.0.1:8090/JSON/core/view/version/"
+```
+
+**Expected output**:
+
+```json
+{"version":"2.16.0"}%
+```
+
 
 ## Setting the Test Environment and Running Tests
 
@@ -126,6 +184,46 @@ Below commands are for Windows OS (e.g., **PowerShell**).
    `localhost:9323`
 
 
+### 🚀 Running OWASP ZAP Security Test
+The security test is **excluded by default.** Run it manually using:
+
+```sh
+ZAP_TEST=true NODE_ENV=prod npx bddgen --tags "@zap-security" && ZAP_TEST=true NODE_ENV=prod npx playwright test --project=chromium --retries=0 --timeout=600000
+```
+✔ **Retries disabled** (`--retries=0`)  
+✔ **Increased timeout** (`--timeout=600000`) for the security scan  
+
+
+
+### 📄 Viewing OWASP ZAP Security Report
+
+Once the security test completes, open the generated report:
+
+```sh
+open zap-reports/security-report.html
+```
+_(Windows: `start zap-reports/security-report.html`)_
+
+
+### **🔍 What Does the Security Test Cover?**
+The **OWASP ZAP security test** scans for common security vulnerabilities such as:
+
+- SQL Injection
+- Cross-Site Scripting (XSS)
+- Broken Authentication
+- Sensitive Data Exposure
+- Security Misconfigurations
+- Unvalidated Redirects
+- Insecure Direct Object References (IDOR)
+- Broken Access Control
+- Session Management Issues
+
+It performs **spidering (crawling)** to discover web pages and endpoints, followed by **active scanning** to detect vulnerabilities.
+
+---
+
+
+
 ## Project Structure
 
 <img width="371" alt="image" src="https://github.com/user-attachments/assets/ad23c6eb-a48e-4ef6-bb2b-82cf37a923d7" />
@@ -162,6 +260,10 @@ Below are details about some of the key folders and files in the project:
 
 *  `pageIndex.ts` and `fixtures.ts` - Provided by the playwright-bdd framework
 The individual Page Object Models (POMs) defined in separate pages in the pages folder are imported in pageIndex.ts file. It then re-exports them from this single access point (Centralised Exports). The fixtures.ts file imports all POMs from pageIndex.ts file, instantiates them and provides the (reusable) instances to step definitions.
+
+*  `utils/zapHelper.ts` - **Handles OWASP ZAP API communication** for security scanning.
+
+*  `zap-reports/` - Stores **OWASP ZAP-generated security reports.**
 
 
 ## Acknowledgement and Thanks
