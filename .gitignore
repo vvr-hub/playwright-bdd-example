@@ -17,3 +17,6 @@ cucumber-report
 
 .nx
 /update.sh
+
+# Ignore OWASP ZAP security reports
+zap-reports/*.html

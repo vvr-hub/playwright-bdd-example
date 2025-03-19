@@ -6,6 +6,8 @@ const testDir = defineBddConfig({
   steps: 'features/stepDefinitions/*.ts',
 });
 
+const isZapTest = process.env.ZAP_TEST === 'true';
+
 export default defineConfig({
   testDir,
   reporter: [
@@ -19,7 +21,14 @@ export default defineConfig({
   use: {
     screenshot: 'on',
     trace: 'on',
+    // Configure the browser to use ZAP's proxy
+    proxy: isZapTest
+      ? {
+        server: 'http://localhost:8090', // Enable ZAP proxy only for security tests
+      }
+      : undefined, // No proxy for normal tests
   },
+  grepInvert: isZapTest ? undefined : /@zap-security/, // Exclude security tests by default
   projects: [
     {
       name: 'chromium',
