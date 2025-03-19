@@ -23,7 +23,6 @@ export const config: Record<Environment, {
 // ZAP Security Testing Configuration
 export const zapConfig = {
   apiUrl: process.env.ZAP_API_URL || 'http://127.0.0.1:8090', // Ensure using IPv4
-  apiKey: process.env.ZAP_API_KEY || 'ldnk6qq7bfhil2pmlfclqh7cbb', // OWASP ZAP API key
 };
 
 // Get configuration based on NODE_ENV
