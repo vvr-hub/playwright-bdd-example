@@ -4,7 +4,7 @@ import path from 'path';
 import { getConfig, zapConfig } from '../../envConfig';
 
 const { baseUrl } = getConfig();
-const ZAP_API = zapConfig.apiUrl; // Use ZAP API URL from centralized config
+const ZAP_API = zapConfig.apiUrl; // Use ZAP API URL from centralised config
 
 export const startZapSpider = async (target: string = baseUrl) => {
     const response = await axios.get(`${ZAP_API}/JSON/spider/action/scan/`, {
@@ -61,6 +61,10 @@ export const generateZapReport = async () => {
         fs.writeFileSync(reportPath, response.data);
         console.log(`✅ ZAP Security Report saved to: ${reportPath}`);
     } catch (error) {
-        console.error('❌ Error generating ZAP report:', error.message);
+        if (error instanceof Error) {
+            console.error('❌ Error generating ZAP report:', error.message);
+        } else {
+            console.error('❌ An unknown error occurred while generating the ZAP report', error);
+        }
     }
 };
