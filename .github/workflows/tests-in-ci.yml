@@ -1,4 +1,4 @@
-name: Playwright BDD Tests
+name: Playwright Tests in CI
 
 on:
   push:

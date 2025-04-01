@@ -18,6 +18,7 @@ using [playwright-bdd](https://github.com/vitalets/playwright-bdd)
 * Page Object Pattern
 * Parallelisation
 * Retries for failing tests
+* ✅ Continuous Integration with **GitHub Actions** – runs Playwright tests automatically on push and PR to `main`  
 * Rich **Reporting** with Playwright & **OWASP ZAP** Reports
 * Easy Test Environment Switching
 * Test Data Separation
@@ -272,6 +273,39 @@ vulnerabilities.
 
 ---
 
+## ✅ GitHub Actions CI Integration
+
+This project includes a GitHub Actions workflow to automatically run Playwright tests.
+
+### 🔄 When Does It Run?
+
+- On every push to the `main` branch
+- On every pull request to `main`
+- Manually via the **Actions** tab on GitHub (for the GitHub account owner and collaborators with Write access)
+
+### 🚀 Workflow File
+
+The workflow is defined in:
+`.github/workflows/tests-in-ci.yml`
+
+### 🧪 Command Used in CI
+
+```sh
+NODE_ENV=prod npx bddgen && NODE_ENV=prod npx playwright test --project=chromium --workers=3 --retries=2
+```
+
+### 📁 HTML Test Reports
+
+After each run, the Playwright HTML test report is uploaded as an artifact:
+
+- Go to the Actions tab
+- Click on the latest workflow run
+- Download the **playwright-html-report** artifact
+- Open `index.html` locally in a browser
+
+
+---
+
 ## Project Structure
 
 
@@ -330,6 +364,10 @@ Below are details about some of the key folders and files in the project:
 * `utils/zapHelper.ts` - **Handles OWASP ZAP API communication** for security scanning.
 
 * `zap-reports/` - Stores **OWASP ZAP-generated security reports.**
+
+* `.github/workflows/` - Contains GitHub Actions workflow files used for running automated tests in CI.  
+  For example, `tests-in-ci.yml` runs the Playwright tests against the production environment whenever a push or pull request is made to the `main` branch.
+
 
 ## Acknowledgement and Thanks
 
