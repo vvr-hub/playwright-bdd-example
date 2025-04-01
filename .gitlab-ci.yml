@@ -1,0 +1,20 @@
+image: node:18 # Or your preferred Node.js version
+
+stages:
+  - test
+
+test_prod:
+  stage: test
+  script:
+    - npm ci # Install dependencies
+    - NODE_ENV=prod npx bddgen # Generate Playwright tests
+    - NODE_ENV=prod npx playwright install chromium # Install chromium browser
+    - NODE_ENV=prod npx playwright test --project=chromium --workers=3 --retries=2 # Run Playwright tests
+  artifacts:
+    paths:
+      - playwright-report/ # Save the Playwright test report
+    expire_in: 1 week
+  cache:
+    paths:
+      - node_modules/
+      - ~/.cache/ms-playwright/
