@@ -1,0 +1,32 @@
+name: Playwright BDD Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  run-playwright-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout code
+        uses: actions/checkout@v3
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20' # Or match your local Node version
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔧 Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: 🧪 Run Playwright BDD Tests (prod)
+        run: |
+          NODE_ENV=prod npx bddgen
+          NODE_ENV=prod npx playwright test --project=chromium --workers=3 --retries=2
