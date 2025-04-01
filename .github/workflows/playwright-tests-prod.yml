@@ -24,7 +24,7 @@ jobs:
     - name: Run Playwright tests (Prod)
       run: NODE_ENV=prod npx playwright test --project=chromium --workers=3 --retries=2
     - name: Upload Playwright report (Prod)
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v3 # No change required, but try again.
       if: always()
       with:
         name: playwright-report-prod
