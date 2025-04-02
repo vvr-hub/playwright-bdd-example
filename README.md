@@ -1,6 +1,6 @@
 # Project with Playwright-BDD, TypeScript, Cukes, POM, Gherkin
 
-![CI](https://github.com/vvr-hub/playwright-bdd-example/actions/workflows/playwright-bdd.yml/badge.svg)
+![CI](https://github.com/vvr-hub/playwright-bdd-example/actions/workflows/tests-in-ci.yml/badge.svg)
 
 ## About the project
 
