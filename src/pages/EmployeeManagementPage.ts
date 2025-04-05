@@ -34,7 +34,7 @@ export default class EmployeeManagementPage {
     const firstName = faker.person.firstName();
     const lastName = faker.person.lastName();
 
-    // Specifying in advance the API calls which are triggered when we add a new employee
+    // Intercepting and validating API requests triggered during employee creation.
     const responsePromise1 = this.page.waitForResponse(response =>
       response.url().endsWith(API_ENDPOINTS.EMPLOYEE_MANAGEMENT.ADD_EMPLOYEE) &&
       response.status() === 200 &&
@@ -69,7 +69,7 @@ export default class EmployeeManagementPage {
     await expect(this.elements.successfullySavedToastMsg).toBeVisible();
     await expect(this.elements.personalDetailsHeader).toBeVisible();
 
-    // Wait for API responses to be received correctly before proceeding
+    // Awaiting confirmation of successful API calls before continuing the test.
     await responsePromise1;
     await responsePromise2;
     await responsePromise3;

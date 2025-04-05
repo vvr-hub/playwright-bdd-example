@@ -1,4 +1,4 @@
-type Environment = 'prod' | 'staging';
+type Environment = 'prod' | 'staging' | 'local';
 
 export const config: Record<Environment, {
   baseUrl: string;
@@ -18,6 +18,13 @@ export const config: Record<Environment, {
       password: 'stg-password',
     },
   },
+  local: {
+    baseUrl: 'http://localhost:8080/', // If you're running the web application locally at port 8080 (on your machine).
+    credentials: {
+      username: 'local-username', // made-up credentials. Invalid for now. Treat these as placeholders.
+      password: 'local-password',
+    },
+  },
 };
 
 // ZAP Security Testing Configuration
@@ -26,7 +33,7 @@ export const zapConfig = {
 };
 
 // Get configuration based on NODE_ENV
-export const getConfig = () => {
+export const getConfig = (): typeof config[Environment] => {
   const env = (process.env.NODE_ENV as Environment) || 'prod';
   return config[env];
 };
