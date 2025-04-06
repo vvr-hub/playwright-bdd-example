@@ -1,5 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
 import { defineBddConfig, cucumberReporter } from 'playwright-bdd';
+import { clearAccessibilityReportsDirectory } from './src/utils/accessibilityUtils';
 
 const testDir = defineBddConfig({
   features: 'features/*.feature',
@@ -9,6 +10,7 @@ const testDir = defineBddConfig({
 const isZapTest = process.env.ZAP_TEST === 'true';
 
 export default defineConfig({
+  globalSetup: require.resolve('./globalSetup'),
   testDir,
   reporter: [
     cucumberReporter('html', {

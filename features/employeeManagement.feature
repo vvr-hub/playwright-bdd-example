@@ -43,5 +43,5 @@ Feature: OrangeHRM PIM (Personnel Information Management)
     Then I should see the employee listed in the employee list
 
   @a11y @regression @Test-16
-  Scenario: Check accessibility on the Employee Personal Details page
+  Scenario: Check accessibility - Employee Personal Details page
     Then the page should have no accessibility violations

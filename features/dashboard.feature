@@ -25,6 +25,6 @@ Feature: OrangeHRM Dashboard
     And I should be navigated to the Admin page
 
   @a11y @regression @Test-14
-  Scenario: Check accessibility on the Dashboard page
+  Scenario: Check accessibility - Dashboard page
     Then I should see the "Dashboard" header
     And the page should have no accessibility violations
