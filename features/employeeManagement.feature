@@ -42,6 +42,6 @@ Feature: OrangeHRM PIM (Personnel Information Management)
     And I search for the employee by employeeId
     Then I should see the employee listed in the employee list
 
-  @a11y @regression @Test-16
+  @a11y @Test-16
   Scenario: Check accessibility - Employee Personal Details page
     Then the page should have no accessibility violations

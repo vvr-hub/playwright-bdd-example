@@ -17,7 +17,7 @@ Feature: OrangeHRM Directory
     Then I enter employee name "NonExistingUser"
     And I should see no records found
 
-  @a11y @regression @Test-15
+  @a11y @Test-15
   Scenario: Check accessibility - Directory page
     Then I should be navigated to the Directory page
     And the page should have no accessibility violations
