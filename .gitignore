@@ -20,3 +20,5 @@ cucumber-report
 
 # Ignore OWASP ZAP security reports
 zap-reports/*.html
+
+/accessibility-reports/
