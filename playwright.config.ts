@@ -50,6 +50,14 @@ export default defineConfig({
       },
       fullyParallel: true,
     },
+
+    {
+      name: 'edge', // Microsoft Edge
+      use: {
+        ...devices['Desktop Edge'],
+      },
+      fullyParallel: true,
+    },
   ],
   expect: { timeout: 12000 },
   timeout: 60000, // Timeout for the entire test

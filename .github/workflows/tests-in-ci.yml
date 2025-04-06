@@ -24,12 +24,12 @@ jobs:
         run: npm ci
 
       - name: 🔧 Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: npx playwright install --with-deps chromium firefox webkit msedge
 
       - name: 🧪 Run Playwright BDD Tests (prod)
         run: |
           NODE_ENV=prod npx bddgen
-          NODE_ENV=prod npx playwright test --project=chromium --workers=3 --retries=2
+          NODE_ENV=prod npx playwright test --workers=3 --retries=2
 
       - name: 📁 Upload Playwright HTML Report
         if: always() # upload even if tests fail
