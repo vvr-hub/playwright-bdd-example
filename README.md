@@ -31,6 +31,7 @@ using [playwright-bdd](https://github.com/vitalets/playwright-bdd)
 * Avoids hardcoding, duplication, flakiness and sleeps
 * Reusable utils and functions (step definitions)
 * **Automated Security Testing** with **OWASP ZAP**
+* 🔍 **Automated Accessibility Testing** with **axe-core** & **HTML reports** – verifies compliance with WCAG standards for web pages
 * Scalability, Maintainability, Readability, Stability, Adoptability
 
 
@@ -272,6 +273,41 @@ The **OWASP ZAP security test** scans for common security vulnerabilities such a
 
 It performs **spidering (crawling)** to discover web pages and endpoints, followed by **active scanning** to detect
 vulnerabilities.
+
+---
+
+## 🔍 Running Accessibility Tests
+
+The accessibility tests ensure compliance with **WCAG standards** using the open-source `axe-core` engine.
+
+Tests are tagged with `@a11y`.
+
+### ✅ To run all accessibility tests (in Unix-based OS, for example, Z Shell):
+
+```sh
+NODE_ENV=prod npx bddgen --tags "@a11y" && NODE_ENV=prod npx playwright test --headed --workers=3
+```
+
+This will launch the browser and run accessibility checks across different pages and browsers.
+
+### ✅ To view accessibility reports:
+
+After the tests finish running, accessibility test reports are generated in the `accessibility-reports/` directory. The `index.html` file in this directory provides a summary of all the generated reports. To view the reports in the browser, use the following commands:
+
+**macOS:**
+```sh
+open accessibility-reports/index.html
+```
+
+**Linux:**
+```sh
+xdg-open accessibility-reports/index.html
+```
+
+**Windows:**
+```sh
+start accessibility-reports/index.html
+```
 
 ---
 
