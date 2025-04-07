@@ -1,5 +1,5 @@
 
-import { runAccessibilityCheck, saveAccessibilityReport } from '../../src/utils/accessibilityUtils';
+import { runAccessibilityCheck, saveAccessibilityReport } from '../../src/utils/accessibility-utils';
 import { Then, When } from './fixtures';
 import { test } from '@playwright/test';
 
@@ -35,6 +35,5 @@ Then('the page should have no accessibility violations', async ({ page, browserN
     );
   }
 });
-
 
 // All (potentially) shared Step Definitions in the future will be placed here.

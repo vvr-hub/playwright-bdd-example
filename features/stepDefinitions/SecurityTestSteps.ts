@@ -1,7 +1,7 @@
 
 import { Given, When, Then } from './fixtures';
 import { getConfig } from '../../envConfig';
-import { generateZapReport, getActiveScanStatus, getSpiderStatus, startZapActiveScan, startZapSpider } from '../../src/utils/zapHelper';
+import { generateZapReport, getActiveScanStatus, getSpiderStatus, startZapActiveScan, startZapSpider } from '../../src/utils/zap-helper';
 
 const { baseUrl } = getConfig();
 

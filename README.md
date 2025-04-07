@@ -346,22 +346,52 @@ After each run, the Playwright HTML test report is uploaded as an artifact:
 
 ## Project Structure
 
+```
 
-![image](https://github.com/user-attachments/assets/a5d66975-992c-4322-aca6-106b3c3f52e2)
+playwright-bdd-example/
+├── .github/
+│   └── workflows/
+│       └── tests-in-ci.yml
+├── accessibility-reports/
+│   └── (reports will be generated here)
+├── features/
+│   ├── login.feature
+│   └── ...
+│   └── stepDefinitions/
+│       ├── LoginSteps.ts
+│       ├── ...
+│       ├── SharedSteps.ts
+│       └── fixtures.ts
+├── playwright-report/
+│   └── (playwright html report files)
+├── src/
+│   ├── constants/
+│   ├── models/
+│   ├── pageElements/
+│   │   └── LoginElements.ts
+│   │   └── ...
+│   │   └── SharedElements.ts
+│   ├── pages/
+│   │   └── LoginPage.ts
+│   │   └── ...
+│   │   └── Shared.ts
+│   │   └── pageIndex.ts
+│   ├── utils/
+│   │   ├── accessibility-utils.ts
+│   │   └── zap-helper.ts
+│   │   └── ...
+├── zap-reports/
+│   └── security-report.html
+├── envConfig.ts
+├── .gitignore
+├── package-lock.json
+├── package.json
+├── globalSetup.ts
+├── playwright.config.ts
+├── README.md
+└── tsconfig.json
 
-
-......continued.....
-
-
-![image](https://github.com/user-attachments/assets/9bb3dd95-eeab-4c22-a964-cf2c79ec5fb9)
-
-
-......continued.....
-
-
-![image](https://github.com/user-attachments/assets/9a1f9b83-f240-4597-b081-3a73331f7f67)
-
-
+```
 
 ## About the project structure
 
@@ -405,7 +435,7 @@ Below are details about some of the key folders and files in the project:
 
 * `zap-reports/` - Stores **OWASP ZAP-generated security reports.**
 
-* `utils/zapHelper.ts` - **Handles OWASP ZAP API communication** for security scanning.
+* `utils/zap-helper.ts` - **Handles OWASP ZAP API communication** for security scanning.
 
 * `.github/workflows/` - Contains GitHub Actions workflow files used for running automated tests in CI.  
   For example, `tests-in-ci.yml` runs the Playwright tests against the production environment whenever a push or pull request is made to the `main` branch.

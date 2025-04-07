@@ -1,5 +1,5 @@
 // globalSetup.ts
-import { clearAccessibilityReportsDirectory } from './src/utils/accessibilityUtils';
+import { clearAccessibilityReportsDirectory } from './src/utils/accessibility-utils';
 
 async function globalSetup() {
   console.log('🔁 Running global setup...');
