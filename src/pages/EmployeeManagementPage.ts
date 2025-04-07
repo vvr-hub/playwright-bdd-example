@@ -133,7 +133,7 @@ export default class EmployeeManagementPage {
   }
 
   async addJobDetailsOfEmployee(employeeDetails: IEmployeeDetails): Promise<IEmployeeDetails> {
-    // Specifying in advance the API calls which are triggered when we add job details for an employee
+    // Intercepting and validating API requests triggered when we add job details for an employee
     const responsePromise1 = this.page.waitForResponse(response => {
       const url = response.url();
       const regex = API_ENDPOINTS.EMPLOYEE_MANAGEMENT.UPDATE_JOB_DETAILS; // Regex matching the end-point
@@ -169,7 +169,7 @@ export default class EmployeeManagementPage {
 
     await this.elements.saveJobDetailsButton.click();
 
-    // Wait for API responses to be received correctly before proceeding
+    // Awaiting confirmation of successful API calls before continuing the test.
     await responsePromise1;
     await responsePromise2;
 
@@ -184,7 +184,7 @@ export default class EmployeeManagementPage {
   async deleteEmployee(employeeDetails: IEmployeeDetails) {
     const { employeeId, firstName, lastName } = this.getEmployeeDetails(employeeDetails);
 
-    // Specifying in advance the API call which is triggered when we delete an employee
+    // Intercepting and validating API requests triggered when we delete an employee
     const responsePromise = this.page.waitForResponse(response =>
       response.url().endsWith(API_ENDPOINTS.EMPLOYEE_MANAGEMENT.DELETE_EMPLOYEE) &&
       response.status() === 200 &&
@@ -201,7 +201,7 @@ export default class EmployeeManagementPage {
     await expect(this.elements.deleteEmployeeModalHeader).not.toBeVisible();
     await expect(this.sharedElements.loader).toBeVisible();
 
-    await responsePromise; // Wait for API response to be received correctly before proceeding
+    await responsePromise; // Awaiting confirmation of successful API calls before continuing the test.
     await expect(this.elements.successfullyDeletedToastMsg).toBeVisible();
   }
 
@@ -213,7 +213,7 @@ export default class EmployeeManagementPage {
   async searchForEmployee(employeeDetails: IEmployeeDetails, filterBy = 'employeeName') {
     await expect(this.elements.employeeInfoHeader).toBeVisible();
 
-    // Specifying in advance the API call which is triggered when we search an employee
+    // Intercepting and validating API requests triggered when we search an employee
     const responsePromise = this.page.waitForResponse(response =>
       response.url().endsWith(API_ENDPOINTS.EMPLOYEE_MANAGEMENT.GET_FILTERED_EMPLOYEES) &&
       response.status() === 200 &&
@@ -243,7 +243,7 @@ export default class EmployeeManagementPage {
     await expect(this.sharedElements.loader).toBeVisible();
     await expect(this.sharedElements.loader).toHaveCount(0);
 
-    await responsePromise; // Wait for API response to be received correctly before proceeding
+    await responsePromise; // Awaiting confirmation of successful API calls before continuing the test.
 
     await this.page.waitForLoadState('domcontentloaded');
     await this.page.waitForLoadState('networkidle');

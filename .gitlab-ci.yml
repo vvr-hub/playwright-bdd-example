@@ -3,24 +3,30 @@ stages:
 
 variables:
   NODE_ENV: "prod"
-  PLAYWRIGHT_BROWSERS_PATH: /root/.cache/ms-playwright
 
 cache:
-  key: ${CI_COMMIT_REF_SLUG}
   paths:
     - node_modules/
-    - .cache/ms-playwright/
 
 playwright-tests:
   stage: test
-  image: mcr.microsoft.com/playwright:v1.44.0-jammy
+  image: mcr.microsoft.com/playwright:v1.43.1-focal
   script:
+    - echo "🔧 Installing dependencies..."
     - npm ci
-    - npx playwright install --with-deps
-    - NODE_ENV=prod npx bddgen
-    - NODE_ENV=prod npx playwright test --project=chromium --workers=3 --retries=2
+
+    - echo "🌐 Installing required Playwright browsers including MS Edge..."
+    - npx playwright install --with-deps chromium firefox webkit msedge
+
+    - echo "⚙️ Generating BDD steps..."
+    - npx bddgen
+
+    - echo "🧪 Running Playwright tests..."
+    - npx playwright test --workers=3 --retries=2
+
   artifacts:
     when: always
+    expire_in: 7 days
     paths:
       - playwright-report/
-    expire_in: 7 days
+      - accessibility-reports/

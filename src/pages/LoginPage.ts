@@ -33,7 +33,7 @@ export default class LoginPage {
     }
 
     async clickLogin() {
-        // Specifying in advance the API call which is triggered when we submit username & password
+        // Intercepting and validating API requests triggered when we submit username & password
         const responsePromise = this.page.waitForResponse(response =>
             response.url().endsWith(API_ENDPOINTS.AUTHENTICATION.VALIDATE_LOGIN) && 
             response.status() === 302
@@ -42,7 +42,7 @@ export default class LoginPage {
    
         await this.elements.loginButton.click();
 
-        await responsePromise; // Wait for API response to be received correctly before proceeding
+        await responsePromise; // Awaiting confirmation of successful API calls before continuing the test.
     }
 
     async verifyInvalidLogin() {

@@ -1,6 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
 import { defineBddConfig, cucumberReporter } from 'playwright-bdd';
-import { clearAccessibilityReportsDirectory } from './src/utils/accessibilityUtils';
 
 const testDir = defineBddConfig({
   features: 'features/*.feature',
