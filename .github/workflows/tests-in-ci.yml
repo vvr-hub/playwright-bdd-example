@@ -26,21 +26,27 @@ jobs:
       - name: 🔧 Install Playwright Browsers
         run: npx playwright install --with-deps chromium firefox webkit msedge
 
-      - name: 🧪 Run Playwright BDD Tests (prod)
+      # Regular tests (e.g., @regression, @smoke), with retries
+      - name: 🧪 Run Regression/Smoke Tests (with retries)
         run: |
           NODE_ENV=prod npx bddgen
-          NODE_ENV=prod npx playwright test --workers=3 --retries=2
+          NODE_ENV=prod npx playwright test --grep=@regression --grep=@smoke --retries=2 --workers=3
+
+      # Accessibility tests (@a11y), no retries
+      - name: ♿ Run Accessibility Tests (no retries)
+        run: |
+          NODE_ENV=prod npx playwright test --grep=@a11y --retries=0 --workers=3
 
       - name: 📁 Upload Playwright HTML Report
-        if: always() # upload even if tests fail
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: playwright-html-report
           path: playwright-report
           retention-days: 7
 
-      - name: 🧪 Upload Accessibility Reports
-        if: always() # upload even if tests fail
+      - name: ♿ Upload Accessibility Reports
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: accessibility-reports
