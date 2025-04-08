@@ -26,13 +26,13 @@ jobs:
       - name: 🔧 Install Playwright Browsers
         run: npx playwright install --with-deps chromium firefox webkit msedge
 
-      # Regular tests (e.g., @regression, @smoke), with retries
-      - name: 🧪 Run Regression/Smoke Tests (with retries)
+      # ✅ Run all tests EXCEPT @a11y — allow retries
+      - name: 🧪 Run Regular Tests (with retries)
         run: |
           NODE_ENV=prod npx bddgen
-          NODE_ENV=prod npx playwright test --grep=@regression --grep=@smoke --retries=2 --workers=3
+          NODE_ENV=prod npx playwright test --grep-invert=@a11y --retries=2 --workers=3
 
-      # Accessibility tests (@a11y), no retries
+      # ✅ Run only @a11y tests — no retries
       - name: ♿ Run Accessibility Tests (no retries)
         run: |
           NODE_ENV=prod npx playwright test --grep=@a11y --retries=0 --workers=3
