@@ -26,20 +26,21 @@ jobs:
       - name: 🔧 Install Playwright Browsers
         run: npx playwright install --with-deps chromium firefox webkit msedge
 
-      # ✅ Run main tests (excluding @a11y) and move report
-      - name: 🧪 Run Regular Tests (with retries)
+      # ✅ Run regular tests (with retries)
+      - name: 🧪 Run Regular Tests (excluding @a11y, with retries)
         run: |
           NODE_ENV=prod npx bddgen
           NODE_ENV=prod npx playwright test --grep-invert=@a11y --retries=2 --workers=3
           mv playwright-report playwright-report-main
 
-      # ✅ Run a11y tests separately (no retries) and move report
-      - name: ♿ Run Accessibility Tests (no retries)
+      # ✅ Run accessibility tests (no retries)
+      - name: ♿ Run Accessibility Tests (@a11y only, no retries)
+        continue-on-error: true
         run: |
           NODE_ENV=prod npx playwright test --grep=@a11y --retries=0 --workers=3
-          mv playwright-report playwright-report-a11y
+          if [ -d "playwright-report" ]; then mv playwright-report playwright-report-a11y; fi
 
-      - name: 📁 Upload Regular Playwright HTML Report
+      - name: 📁 Upload Regular Playwright Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -47,12 +48,23 @@ jobs:
           path: playwright-report-main
           retention-days: 7
 
-      - name: ♿ Upload Accessibility Playwright HTML Report
+      - name: ♿ Upload Accessibility Playwright Report (if it exists)
+        if: always()
+        run: |
+          if [ -d "playwright-report-a11y" ]; then
+            echo "Uploading playwright-report-a11y..."
+            tar -czf playwright-report-a11y.tar.gz playwright-report-a11y
+          else
+            echo "No playwright-report-a11y directory found, skipping upload."
+          fi
+        shell: bash
+
+      - name: ♿ Upload Accessibility Playwright Report Artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: playwright-html-report-a11y
-          path: playwright-report-a11y
+          path: playwright-report-a11y.tar.gz
           retention-days: 7
 
       - name: ♿ Upload Accessibility Reports

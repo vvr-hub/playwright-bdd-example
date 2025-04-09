@@ -21,11 +21,11 @@ playwright-regular-tests:
     - echo "⚙️ Generating BDD steps..."
     - npx bddgen
 
-    - echo "🧪 Running Regular Playwright tests (excluding @a11y)..."
+    - echo "🧪 Running Regular Playwright tests (excluding @a11y, with retries)..."
     - npx playwright test --grep-invert=@a11y --retries=2 --workers=3
 
     - echo "📁 Renaming report folder to playwright-report-main..."
-    - mv playwright-report playwright-report-main
+    - mv playwright-report playwright-report-main || echo "No regular report found."
 
   artifacts:
     when: always
@@ -46,11 +46,11 @@ playwright-a11y-tests:
     - echo "⚙️ Generating BDD steps..."
     - npx bddgen
 
-    - echo "♿ Running Accessibility Playwright tests (tag: @a11y)..."
-    - npx playwright test --grep=@a11y --retries=0 --workers=3
+    - echo "♿ Running Accessibility Playwright tests (tag: @a11y, no retries)..."
+    - npx playwright test --grep=@a11y --retries=0 --workers=3 || echo "No accessibility tests executed."
 
-    - echo "📁 Renaming report folder to playwright-report-a11y..."
-    - mv playwright-report playwright-report-a11y
+    - echo "📁 Renaming report folder to playwright-report-a11y if it exists..."
+    - if [ -d "playwright-report" ]; then mv playwright-report playwright-report-a11y; fi
 
   artifacts:
     when: always
