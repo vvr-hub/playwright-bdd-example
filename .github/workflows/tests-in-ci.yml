@@ -45,22 +45,29 @@ jobs:
           path: playwright-report-main
           retention-days: 7
 
-      - name: ♿ Upload Accessibility Playwright Report (if it exists)
+      - name: ♿ Conditionally Upload Accessibility Playwright Report
         if: always()
         run: |
           if [ -d "playwright-report-a11y" ]; then
-            echo "Uploading playwright-report-a11y"
-            tar -czf playwright-report-a11y.tar.gz playwright-report-a11y
+            echo "Uploading accessibility report..."
+            tar -cf - playwright-report-a11y | base64 > report.a11y.base64
           else
-            echo "No accessibility report found. Skipping upload."
+            echo "No accessibility report found. Skipping."
           fi
 
-      - name: ♿ Upload Accessibility Playwright Report Artifact (tar.gz)
+      - name: ♿ Decode and Upload Accessibility Report (if available)
+        if: always()
+        run: |
+          if [ -f "report.a11y.base64" ]; then
+            base64 -d report.a11y.base64 | tar -xf -
+          fi
+
+      - name: ♿ Upload Accessibility Report Artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: playwright-html-report-a11y
-          path: playwright-report-a11y.tar.gz
+          path: playwright-report-a11y
           retention-days: 7
 
       - name: ♿ Upload Accessibility Reports
