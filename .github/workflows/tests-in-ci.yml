@@ -34,7 +34,7 @@ jobs:
 
       - name: ♿ Run Accessibility Tests (@a11y only, no retries)
         run: |
-          NODE_ENV=prod npx playwright test --grep=@a11y --retries=0 --workers=3
+          NODE_ENV=prod npx playwright test --grep=@a11y --retries=0 --workers=3 --reporter=html
           if [ -d "playwright-report" ]; then mv playwright-report playwright-report-a11y; fi
 
       - name: 📁 Upload Regular Playwright Report
@@ -45,19 +45,15 @@ jobs:
           path: playwright-report-main
           retention-days: 7
 
-      - name: ♿ Upload Accessibility Report (only if folder exists)
+      - name: ♿ Upload Accessibility Playwright Report
         if: always()
-        run: |
-          if [ -d "playwright-report-a11y" ]; then
-            echo "Uploading accessibility report..."
-            gh run upload-artifact --name playwright-html-report-a11y playwright-report-a11y
-          else
-            echo "No accessibility report found. Skipping."
-          fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-html-report-a11y
+          path: playwright-report-a11y
+          retention-days: 7
 
-      - name: ♿ Upload Accessibility Reports Folder
+      - name: ♿ Upload Accessibility Reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
