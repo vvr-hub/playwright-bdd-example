@@ -56,6 +56,9 @@ jobs:
       - name: 🔧 Install Playwright Browsers
         run: npx playwright install --with-deps chromium firefox webkit msedge
 
+      - name: 🧪 Generate BDD Files (again, to be safe)
+        run: NODE_ENV=prod npx bddgen
+
       - name: 🧪 Run Accessibility Tests (tagged @a11y, no retries)
         run: |
           export PLAYWRIGHT_OUTPUT_DIR=playwright-report-a11y
