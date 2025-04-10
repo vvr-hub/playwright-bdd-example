@@ -29,12 +29,12 @@ jobs:
       - name: 🧪 Run Regular Tests (excluding @a11y, with retries)
         run: |
           NODE_ENV=prod npx bddgen
-          NODE_ENV=prod npx playwright test --grep-invert=@a11y --retries=2 --workers=3
-          mv playwright-report playwright-report-main
+          NODE_ENV=prod npx playwright test --grep-invert "@a11y" --retries=2 --workers=3
+          if [ -d "playwright-report" ]; then mv playwright-report playwright-report-main; fi
 
       - name: ♿ Run Accessibility Tests (@a11y only, no retries)
         run: |
-          NODE_ENV=prod npx playwright test --grep=@a11y --retries=0 --workers=3 --reporter=html
+          NODE_ENV=prod npx playwright test --grep "@a11y" --retries=0 --workers=3
           if [ -d "playwright-report" ]; then mv playwright-report playwright-report-a11y; fi
 
       - name: 📁 Upload Regular Playwright Report
