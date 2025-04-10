@@ -61,15 +61,14 @@ jobs:
 
       - name: 🧪 Run Accessibility Tests (tagged @a11y, no retries)
         run: |
-          export PLAYWRIGHT_OUTPUT_DIR=playwright-report-a11y
-          NODE_ENV=prod npx playwright test --grep="@a11y" --retries=0 --workers=3 --reporter=html
+          NODE_ENV=prod npx playwright test --grep="@a11y" --retries=0 --workers=3 --reporter=html=playwright-report-a11y
 
       - name: ♿ Upload Accessibility Playwright Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: playwright-html-report-a11y
-          path: playwright-report-a11y # Ensure this matches the output directory
+          path: playwright-report-a11y
           retention-days: 7
 
       - name: ♿ Upload Accessibility Reports
