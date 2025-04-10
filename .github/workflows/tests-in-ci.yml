@@ -57,7 +57,9 @@ jobs:
         run: npx playwright install --with-deps chromium firefox webkit msedge
 
       - name: 🧪 Run Accessibility Tests (@a11y only, no retries)
-        run: NODE_ENV=prod npx playwright test --grep "@a11y" --retries=0 --workers=3 --reporter=html --outputDir=playwright-report-a11y
+        run: |
+          export PLAYWRIGHT_OUTPUT_DIR=playwright-report-a11y
+          NODE_ENV=prod npx playwright test --grep "@a11y" --retries=0 --workers=3 --reporter=html
 
       - name: ♿ Upload Accessibility Playwright Report
         if: always()
