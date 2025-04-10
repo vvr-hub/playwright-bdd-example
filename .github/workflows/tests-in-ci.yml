@@ -45,32 +45,19 @@ jobs:
           path: playwright-report-main
           retention-days: 7
 
-      - name: ♿ Conditionally Upload Accessibility Playwright Report
+      - name: ♿ Upload Accessibility Report (only if folder exists)
         if: always()
         run: |
           if [ -d "playwright-report-a11y" ]; then
             echo "Uploading accessibility report..."
-            tar -cf - playwright-report-a11y | base64 > report.a11y.base64
+            gh run upload-artifact --name playwright-html-report-a11y playwright-report-a11y
           else
             echo "No accessibility report found. Skipping."
           fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: ♿ Decode and Upload Accessibility Report (if available)
-        if: always()
-        run: |
-          if [ -f "report.a11y.base64" ]; then
-            base64 -d report.a11y.base64 | tar -xf -
-          fi
-
-      - name: ♿ Upload Accessibility Report Artifact
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-html-report-a11y
-          path: playwright-report-a11y
-          retention-days: 7
-
-      - name: ♿ Upload Accessibility Reports
+      - name: ♿ Upload Accessibility Reports Folder
         if: always()
         uses: actions/upload-artifact@v4
         with:
