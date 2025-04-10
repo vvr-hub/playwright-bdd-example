@@ -10,6 +10,8 @@ on:
 jobs:
   run-playwright-tests:
     runs-on: ubuntu-latest
+    outputs:
+      upload_a11y_report: ${{ steps.check-a11y.outputs.upload }}
 
     steps:
       - name: ⬇️ Checkout code
@@ -45,8 +47,21 @@ jobs:
           path: playwright-report-main
           retention-days: 7
 
-      - name: ♿ Upload Accessibility Playwright Report (if it exists)
-        if: always()
+      # ✅ Set output if accessibility report folder exists
+      - name: ✅ Check if Accessibility Report Exists
+        id: check-a11y
+        run: |
+          if [ -d "playwright-report-a11y" ]; then
+            echo "Accessibility report found."
+            echo "upload=true" >> $GITHUB_OUTPUT
+          else
+            echo "No accessibility report to upload."
+            echo "upload=false" >> $GITHUB_OUTPUT
+          fi
+
+      # ✅ Upload A11Y report only if it exists
+      - name: ♿ Upload Accessibility Playwright Report (only if it exists)
+        if: steps.check-a11y.outputs.upload == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: playwright-html-report-a11y
