@@ -32,10 +32,14 @@ jobs:
 
       - name: ⚙️ Start OWASP ZAP Daemon (Headless)
         run: |
-          nohup zaproxy -daemon -host 127.0.0.1 -port 8080 -config api.disablekey=true &
-          sleep 30
-          echo "ZAP daemon started"
+          nohup zaproxy -daemon -host 127.0.0.1 -port 8090 -config api.disablekey=true &
+          sleep 45
+          echo "ZAP daemon started on port 8090"
 
+      - name: ✅ Verify ZAP is running
+        run: |
+          curl --fail http://127.0.0.1:8090 || (echo "ZAP not responding on port 8090" && exit 1)
+  
       - name: 🧪 Generate BDD Tests for @zap-security
         run: npx bddgen --tags "@zap-security"
 
