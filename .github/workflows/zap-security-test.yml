@@ -1,0 +1,50 @@
+name: Run OWASP ZAP Security Test
+
+on:
+  workflow_dispatch:  # Manual trigger only
+
+jobs:
+  zap-security-scan:
+    name: Run OWASP ZAP Security Test with Playwright
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    env:
+      ZAP_TEST: true
+      NODE_ENV: prod
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v3
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔧 Install OWASP ZAP CLI
+        run: |
+          sudo snap install zaproxy --classic
+          zaproxy -version
+
+      - name: ⚙️ Start OWASP ZAP Daemon (Headless)
+        run: |
+          nohup zaproxy -daemon -host 127.0.0.1 -port 8080 -config api.disablekey=true &
+          sleep 30
+          echo "ZAP daemon started"
+
+      - name: 🧪 Generate BDD Tests for @zap-security
+        run: npx bddgen --tags "@zap-security"
+
+      - name: 🧪 Run Playwright ZAP Security Test
+        run: npx playwright test --project=chromium --retries=0 --timeout=600000
+
+      - name: 📤 Upload Playwright Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zap-security-test-report
+          path: playwright-report/
