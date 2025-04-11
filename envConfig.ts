@@ -11,7 +11,7 @@ export type TestData = {
     username: string;
     password: string;
   };
-  // Extend here later with employeeDetails, roles, etc.
+  // Extend here later as more test data gets added.
 };
 
 export const config: Record<Environment, { baseUrl: string }> = {

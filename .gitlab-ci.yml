@@ -56,5 +56,4 @@ playwright-a11y-tests:
     when: always
     expire_in: 7 days
     paths:
-      - playwright-report-a11y/
       - accessibility-reports/

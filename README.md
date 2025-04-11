@@ -23,7 +23,7 @@ using [playwright-bdd](https://github.com/vitalets/playwright-bdd)
 * ✅ Continuous Integration with **GitHub Actions** – runs Playwright tests automatically on push and PR to `main`  
 * Rich **Reporting** with Playwright & **OWASP ZAP** Reports
 * Easy Test Environment Switching
-* Test Data Separation
+* Test Data Separation - environment-specific test data files
 * Cross Browser (Compatibility) Testing - Chrome, Firefox, Safari
 * Tests are easy to read and understand, in (business-friendly) Given -> When -> Then format
 * Tags help in easily specifying which tests to run - smoke, regression or for a specific feature
@@ -382,6 +382,9 @@ playwright-bdd-example/
 │   │   └── ...
 ├── zap-reports/
 │   └── security-report.html
+├── testData/
+│   ├── prod.json
+│   └── ...
 ├── envConfig.ts
 ├── .gitignore
 ├── package-lock.json
@@ -414,10 +417,11 @@ Below are details about some of the key folders and files in the project:
 * `utils/` - Contains (potentially) reusable utility functions, such as date formatting, picking values from enums, etc.
   These functions are not specific to the application's functionality but support testing.
 
-* `envConfig.ts` - Manages environment-specific configurations (e.g., base URL, login credentials, test data in future).
+* `playwright.config.ts` - Defines global Playwright settings for the project, such as timeouts, parallel execution, test retries, viewport size, trace and screenshot options, browser/device selection, and environment-specific settings. Centralises all execution-related configuration for reliable and consistent test runs.
 
-* `playwright.config.ts` - Contains Playwright settings (timeouts, parallelisation, viewport, retries, screenshots,
-  trace, etc), browser and platform coverage
+* `envConfig.ts` - Manages environment-specific configurations (Example: base URL, test data).
+
+* `testData/` - Environment-specific test data files (where new test data may be added in future).
 
 * `package.json` - Defines project dependencies (libraries) and includes scripts for setting environments and running
   tests.
@@ -439,6 +443,8 @@ Below are details about some of the key folders and files in the project:
 
 * `.github/workflows/` - Contains GitHub Actions workflow files used for running automated tests in CI.  
   For example, `tests-in-ci.yml` runs the Playwright tests against the production environment whenever a push or pull request is made to the `main` branch.
+
+* `tsconfig.json` - Configures the TypeScript compiler options such as the target version of JavaScript, module system, and support for features like strict typing and importing JSON modules. Ensures consistent behavior and type checking across the project.
 
 
 ## Acknowledgement and Thanks
