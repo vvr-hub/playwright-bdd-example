@@ -18,10 +18,10 @@ export default class LoginPage {
     }
 
     async enterValidCredentials() {
-        // Getting the username and password (test data) from the config file as per the targeted environment.
-        const { credentials } = getConfig();
-        await this.enterUser(credentials.username);
-        await this.enterPassword(credentials.password);
+        // Getting the username and password (test data) from the test data file as per the targeted environment.
+        const { testData } = getConfig();
+        await this.enterUser(testData.credentials.username);
+        await this.enterPassword(testData.credentials.password);
     }
 
     async enterUser(username: string) {

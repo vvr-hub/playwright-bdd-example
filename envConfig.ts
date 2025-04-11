@@ -10,7 +10,7 @@ type TestData = {
     username: string;
     password: string;
   };
-  // You can add more types like employeeDetails, searchTerms later
+  // You can add more test data later
 };
 
 export const config: Record<Environment, { baseUrl: string }> = {
@@ -25,16 +25,16 @@ export const zapConfig = {
 };
 
 // Get configuration based on NODE_ENV
-export const getConfig = (): { baseUrl: string; credentials: TestData['credentials'] } => {
+export const getConfig = (): { baseUrl: string; testData: TestData } => {
   const env = (process.env.NODE_ENV as Environment) || 'prod';
 
   const testData: TestData =
     env === 'prod' ? prodData :
-    env === 'staging' ? stagingData :
-    localData;
+      env === 'staging' ? stagingData :
+        localData;
 
   return {
     baseUrl: config[env].baseUrl,
-    credentials: testData.credentials,
+    testData,
   };
 };
