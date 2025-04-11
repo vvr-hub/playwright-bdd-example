@@ -30,25 +30,32 @@ jobs:
           sudo snap install zaproxy --classic
           zaproxy -version
 
-      - name: ⚙️ Start OWASP ZAP Daemon (Headless)
+      - name: ⚙️ Start OWASP ZAP Daemon on port 8090
         run: |
           nohup zaproxy -daemon -host 127.0.0.1 -port 8090 -config api.disablekey=true &
           sleep 45
           echo "ZAP daemon started on port 8090"
 
-      - name: ✅ Verify ZAP is running
+      - name: ✅ Verify ZAP is running on port 8090
         run: |
           curl --fail http://127.0.0.1:8090 || (echo "ZAP not responding on port 8090" && exit 1)
-  
+
       - name: 🧪 Generate BDD Tests for @zap-security
         run: npx bddgen --tags "@zap-security"
 
       - name: 🧪 Run Playwright ZAP Security Test
         run: npx playwright test --project=chromium --retries=0 --timeout=600000
 
-      - name: 📤 Upload Playwright Reports
+      - name: 📤 Upload Playwright HTML Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: zap-security-test-report
+          name: playwright-report
           path: playwright-report/
+
+      - name: 📤 Upload OWASP ZAP Security Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zap-security-report
+          path: security-reports/owasp-zap-report.html
