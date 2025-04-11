@@ -1,5 +1,6 @@
 {
+  "credentials": {
     "username": "local-username",
     "password": "local-password"
   }
-  
+}
