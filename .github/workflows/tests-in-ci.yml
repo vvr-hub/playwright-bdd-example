@@ -67,14 +67,6 @@ jobs:
           export PLAYWRIGHT_OUTPUT_DIR=playwright-report-a11y
           NODE_ENV=prod npx playwright test --grep="@a11y" --retries=0 --workers=3 --reporter=html
 
-      - name: ♿ Upload Accessibility Playwright Report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-html-report-a11y
-          path: playwright-report-a11y
-          retention-days: 7
-
       - name: ♿ Upload Accessibility Reports
         if: always()
         uses: actions/upload-artifact@v4
