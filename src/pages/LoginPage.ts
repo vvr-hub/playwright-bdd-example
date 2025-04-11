@@ -3,6 +3,7 @@ import { expect, Page } from '@playwright/test';
 import { LoginElements } from "../pageElements/LoginElements";
 
 import { getConfig } from '../../envConfig';
+import { getTestData } from '../../envConfig';
 
 import { API_ENDPOINTS } from '../constants/apiEndpoints';
 
@@ -19,7 +20,7 @@ export default class LoginPage {
 
     async enterValidCredentials() {
         // Getting the username and password (test data) from the test data file as per the targeted environment.
-        const { testData } = getConfig();
+        const testData = getTestData();
         await this.enterUser(testData.credentials.username);
         await this.enterPassword(testData.credentials.password);
     }
