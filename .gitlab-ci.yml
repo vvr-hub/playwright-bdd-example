@@ -1,59 +1,72 @@
 stages:
+  - setup
   - test
+  - accessibility
+  - security
 
 variables:
   NODE_ENV: "prod"
+  PLAYWRIGHT_BROWSERS_PATH: 0
 
-cache:
-  paths:
-    - node_modules/
-
-playwright-regular-tests:
-  stage: test
-  image: mcr.microsoft.com/playwright:v1.43.1-focal
-  script:
-    - echo "🔧 Installing dependencies..."
+.default-job-template: &default-job-template
+  image: mcr.microsoft.com/playwright:v1.43.1-jammy
+  before_script:
     - npm ci
-
-    - echo "🌐 Installing required Playwright browsers including MS Edge..."
     - npx playwright install --with-deps chromium firefox webkit msedge
-
-    - echo "⚙️ Generating BDD steps..."
-    - npx bddgen
-
-    - echo "🧪 Running Regular Playwright tests (excluding @a11y, with retries)..."
-    - npx playwright test --grep-invert=@a11y --retries=2 --workers=3
-
-    - echo "📁 Renaming report folder to playwright-report-main..."
-    - mv playwright-report playwright-report-main || echo "No regular report found."
-
   artifacts:
-    when: always
     expire_in: 7 days
-    paths:
-      - playwright-report-main/
+    when: always
 
-playwright-a11y-tests:
+# ========================
+# 🚀 Stage: Regular Playwright Tests (Smoke + Regression)
+# ========================
+regular-playwright-tests:
+  <<: *default-job-template
   stage: test
-  image: mcr.microsoft.com/playwright:v1.43.1-focal
   script:
-    - echo "🔧 Installing dependencies..."
-    - npm ci
-
-    - echo "🌐 Installing required Playwright browsers including MS Edge..."
-    - npx playwright install --with-deps chromium firefox webkit msedge
-
-    - echo "⚙️ Generating BDD steps..."
     - npx bddgen
-
-    - echo "♿ Running Accessibility Playwright tests (tag: @a11y, no retries)..."
-    - npx playwright test --grep=@a11y --retries=0 --workers=3 || echo "No accessibility tests executed."
-
-    - echo "📁 Renaming report folder to playwright-report-a11y if it exists..."
-    - if [ -d "playwright-report" ]; then mv playwright-report playwright-report-a11y; fi
-
+    - npx playwright test --grep-invert "@a11y" --retries=2 --workers=3
   artifacts:
-    when: always
-    expire_in: 7 days
     paths:
-      - accessibility-reports/
+      - playwright-report
+    name: "playwright-html-report-regular"
+
+# ========================
+# ♿ Stage: Accessibility Tests (@a11y)
+# ========================
+accessibility-tests:
+  <<: *default-job-template
+  stage: accessibility
+  script:
+    - npx bddgen
+    - mkdir -p accessibility-reports
+    - export PLAYWRIGHT_OUTPUT_DIR=playwright-report-a11y
+    - npx playwright test --grep="@a11y" --retries=0 --workers=3 --reporter=html
+  artifacts:
+    paths:
+      - accessibility-reports
+    name: "accessibility-reports"
+
+# ========================
+# 🔒 Stage: Manual OWASP ZAP Security Test
+# ========================
+zap-security-scan:
+  <<: *default-job-template
+  stage: security
+  when: manual
+  allow_failure: false
+  variables:
+    ZAP_TEST: "true"
+  script:
+    - sudo apt-get update && sudo apt-get install -y snapd
+    - sudo snap install zaproxy --classic
+    - nohup zaproxy -daemon -host 127.0.0.1 -port 8090 -config api.disablekey=true &
+    - sleep 45
+    - curl --fail http://127.0.0.1:8090 || (echo "ZAP not responding on port 8090" && exit 1)
+    - npx bddgen --tags "@zap-security"
+    - npx playwright test --project=chromium --retries=0 --timeout=600000
+  artifacts:
+    paths:
+      - playwright-report
+      - zap-reports/security-report.html
+    name: "zap-security-report"

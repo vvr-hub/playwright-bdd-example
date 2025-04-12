@@ -274,6 +274,14 @@ The **OWASP ZAP security test** scans for common security vulnerabilities such a
 It performs **spidering (crawling)** to discover web pages and endpoints, followed by **active scanning** to detect
 vulnerabilities.
 
+### 🔒 Running OWASP ZAP Security Test via GitHub Actions
+
+You can run the ZAP-based security test manually on GitHub:  
+
+1. Go to the **"Actions"** tab of this repository.  
+2. Select **"Run OWASP ZAP Security Test"** workflow.  
+3. Click **"Run workflow"** (you can leave the default settings).  
+
 ---
 
 ## 🔍 Running Accessibility Tests
