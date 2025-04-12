@@ -1,6 +1,6 @@
 # Project with Playwright-BDD, TypeScript, Cukes, POM, Gherkin
 
-![CI](https://github.com/vvr-hub/playwright-bdd-example/actions/workflows/functional-and-accessibility-tests.yml/badge.svg)
+![CI](https://github.com/vvr-hub/playwright-bdd-example/actions/workflows/playwright-tests.yml/badge.svg)
 
 ## About the project
 
@@ -332,7 +332,7 @@ This project includes a GitHub Actions workflow to automatically run Playwright 
 ### 🚀 Workflow File
 
 The workflow is defined in:
-`.github/workflows/functional-and-accessibility-tests.yml`
+`.github/workflows/playwright-tests.yml`
 
 ### 🧪 Command Used in CI
 
@@ -359,7 +359,8 @@ After each run, the Playwright HTML test report is uploaded as an artifact:
 playwright-bdd-example/
 ├── .github/
 │   └── workflows/
-│       └── functional-and-accessibility-tests.yml
+│       └── playwright-tests.yml
+│       └── accessibility-tests.yml
 │       └── zap-security-test.yml
 ├── accessibility-reports/
 │   └── (reports will be generated here)
@@ -451,7 +452,7 @@ Below are details about some of the key folders and files in the project:
 * `utils/zap-helper.ts` - **Handles OWASP ZAP API communication** for security scanning.
 
 * `.github/workflows/` - Contains GitHub Actions workflow files used for running automated tests in CI.  
-  For example, `functional-and-accessibility-tests.yml` runs the Playwright tests against the production environment whenever a push or pull request is made to the `main` branch.
+  For example, `playwright-tests.yml` runs the Playwright tests against the production environment whenever a push or pull request is made to the `main` branch.
 
 * `tsconfig.json` - Configures the TypeScript compiler options such as the target version of JavaScript, module system, and support for features like strict typing and importing JSON modules. Ensures consistent behavior and type checking across the project.
 
